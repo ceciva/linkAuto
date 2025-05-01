@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novedades mundo automotor</title>
+    <link rel="icon" href="./img/autolinkLogo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5C8374',
+                        secondary: '#1B4242',
+                        accent: '#0926535',
+                        light: '#9EC8B9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .journalist-card {
+            
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .journalist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .video-carousel {
+            scroll-behavior: smooth;
+        }
+        .video-thumbnail {
+            transition: transform 0.3s ease;
+        }
+        .video-thumbnail:hover {
+            transform: scale(1.03);
+        }
+        .video-container:hover .play-icon {
+            opacity: 0.5;
+        }
+        .play-icon {
+            transition: opacity 0.3s ease;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .carousel-item {
+            flex: 0 0 50%;
+            margin: 0 2%;
+            scroll-snap-align: center;
+        }
+        .carousel-item:first-child {
+            margin-left: 0;
+        }
+        .carousel-item:last-child {
+            margin-right: 0;
+        }
+        .carousel-wrapper {
+            width: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .infinite-carousel {
+            display: flex;
+            width: 70vw; 
+            transform: translateX(0); 
+            transition: transform 0.3s linear; 
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-container:hover .infinite-carousel {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-light dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="bg-primary dark:bg-gray-800 shadow-md py-4 px-6 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="./img/autolinkLogo.png" alt="Logo" class="w-12">
+                <span class="text-xl font-bold text-secondary dark:text-light">AutoLink</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <a href="#" class="text-secondary dark:text-gray-300 hover:text-black dark:hover:text-white">Home</a>
+                <a href="#voces" class="nav-link text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white">Voces</a>
+                <a href="#canales" class=" nav-link text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white">Canales</a>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">AutoLink: Conéctate con el Futuro y la Historia del Automóvil.</h1>
+    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Descubrí la ingeniería, el diseño, la economía, la historia, la tecnología y el futuro de los automóviles con la visión experta de nuestro equipo.</h2>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Latest Videos Carousel Section -->
+        <section class="mb-20" id="voces">
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Las voces de nuestros expertos</h2>
+            
+            <div class="relative carousel-container">
+                <!-- Video Carousel -->
+                <div class="infinite-carousel">
+                    <!-- Duplicate items for infinite effect -->
+                    <!-- Video 1 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/MariaLopez.jpg"
+                                     alt="Video thumbnail Maria Lopez"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon1" onclick="togglePlayPause('miAudio1')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio1" src="./audio/MariaLopez.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">María López</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/FelipeTacatun.jpg"
+                                     alt="Video thumbnail Felipe Tacatún"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon2" onclick="togglePlayPause('miAudio2')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio2" src="./audio/FelipeTacatun.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Felipe Tacatún</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 3 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/SusanaFlores.jpg"
+                                     alt="Video thumbnail Susana Flores"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon3" onclick="togglePlayPause('miAudio3')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio3" src="./audio/SusanaFlores.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Susana Flores</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 4 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/RamiroFuentes.jpg"
+                                     alt="Video thumbnail Ramiro Fuentes"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon4" onclick="togglePlayPause('miAudio4')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio4" src="./audio/RamiriFuentes.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Ramiro Fuentes</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 5 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/CarlaRios.jpg"
+                                     alt="Video thumbnail Carla Rios"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon5" onclick="togglePlayPause('miAudio5')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio5" src="./audio/CarlaRios.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Carla Rios</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 6 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/FranciscoLagos.jpg"
+                                     alt="Video thumbnail Francisco Lagos"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon6" onclick="togglePlayPause('miAudio6')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio6" src="./audio/FranciscoLagos.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Francisco Lagos</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Duplicate items for infinite effect -->
+                     <!-- Video 1 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/MariaLopez.jpg"
+                                     alt="Video thumbnail Maria Lopez"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon1" onclick="togglePlayPause('miAudio1')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio1" src="./audio/MariaLopez.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">María López</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/FelipeTacatun.jpg"
+                                     alt="Video thumbnail Felipe Tacatún"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon2" onclick="togglePlayPause('miAudio2')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio2" src="./audio/FelipeTacatun.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Felipe Tacatún</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 3 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/SusanaFlores.jpg"
+                                     alt="Video thumbnail Susana Flores"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon3" onclick="togglePlayPause('miAudio3')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio3" src="./audio/SusanaFlores.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Susana Flores</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 4 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/RamiroFuentes.jpg"
+                                     alt="Video thumbnail Ramiro Fuentes"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon4" onclick="togglePlayPause('miAudio4')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio4" src="./audio/RamiriFuentes.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Ramiro Fuentes</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 5 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/CarlaRios.jpg"
+                                     alt="Video thumbnail Carla Rios"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon5" onclick="togglePlayPause('miAudio5')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio5" src="./audio/CarlaRios.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Carla Rios</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video 6 -->
+                    <div class="carousel-item">
+                        <div class="h-full flex flex-col">
+                            <div class="video-container relative rounded-xl overflow-hidden bg-gray-200 h-full">
+                                <img src="./img/FranciscoLagos.jpg"
+                                     alt="Video thumbnail Francisco Lagos"
+                                     class="video-thumbnail w-full h-full object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-icon bg-black bg-opacity-50 rounded-full w-16 h-16 flex items-center justify-center">
+                                        <i id="playPauseIcon6" onclick="togglePlayPause('miAudio6')" class="fas fa-play text-white text-2xl cursor-pointer"></i>
+                                        <audio id="miAudio6" src="./audio/FranciscoLagos.mp3"></audio>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-2">
+                                <h3 class="font-medium text-lg text-gray-800 dark:text-white">Francisco Lagos</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function togglePlayPause(audioId) {
+                            const audio = document.getElementById(audioId);
+                            const icon = document.getElementById('playPauseIcon' + audioId.slice(-1)); // Obtener el número del ID
+                        
+                            if (audio.paused || audio.ended) {
+                                audio.play();
+                                icon.classList.remove('fa-play');
+                                icon.classList.add('fa-pause');
+                            } else {
+                                audio.pause();
+                                icon.classList.remove('fa-pause');
+                                icon.classList.add('fa-play');
+                            }
+                        }
+                        </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Journalists Section -->
+        <section class="mt-16" id="canales">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Ver videos publicados</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <!-- Journalist 1 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden ">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/MariaLopez.jpg" 
+                             alt="María Lopez" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">María Lopez</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Movilidad eléctrica y sostenibilidad automotriz.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2"></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Journalist 2 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/FelipeTacatun.jpg" 
+                             alt="Felipe Tacatún" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Felipe Tacatún</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Rrendimiento y análisis técnico de motores.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2"></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Journalist 3 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/SusanaFlores.jpg" 
+                             alt="Susana Flores" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Susana Flores</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Cronista industria e implicancias económicas.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2"></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Journalist 4 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/RamiroFuentes.jpg" 
+                             alt="Ramiro Fuentes" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Ramiro Fuentes</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Diseño automotriz y la historia de los vehículos icónicos.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2"></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Journalist 5 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/CarlaRios.jpg" 
+                             alt="Carla Rios" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Carla Rios</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Experiencia del usuario y tecnología integrada.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2 mb-2"></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Journalist 6 -->
+                <div class="journalist-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="./img/FranciscoLagos.jpg" 
+                             alt="Francisco Lagos" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Francisco Lagos</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Noticias de última hora,lanzamientos de nuevos modelos.</p>
+                        <a href="https://youtube.com" target="_blank" class="inline-flex items-center text-primary dark:text-accent hover:text-secondary dark:hover:text-light">
+                            <i class="fab fa-youtube mr-2 "></i>
+                            Visitar canal Youtube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            });
+
+            // Check for saved theme preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.documentElement.classList.add('dark');
+            }
+
+            // Infinite carousel functionality
+
+            const carouselContainer = document.querySelector('.carousel-container');
+            const carousel = document.querySelector('.infinite-carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const numOriginalItems = 6; 
+            const itemWidthPercentage = 70; 
+            const itemMarginPercentage = 3;
+            let currentPosition = 0;
+            const scrollSpeed = 3; 
+            let animationFrameId;
+            
+
+            // Duplicate items for seamless infinite scroll
+
+            const originalItems = Array.from(items).slice(0, numOriginalItems);
+            originalItems.forEach(item => {
+                const clone = item.cloneNode(true);
+                carousel.appendChild(clone);
+            });
+            function scrollCarousel() {
+                currentPosition -= scrollSpeed;
+                carousel.style.transform = `translateX(${currentPosition}px)`;
+
+                // Calcular el ancho total de los elementos originales
+                const totalOriginalWidth = numOriginalItems * (itemWidthPercentage / 100 * carouselContainer.offsetWidth + itemMarginPercentage / 100 * carouselContainer.offsetWidth * 2);
+
+                if (Math.abs(currentPosition) > totalOriginalWidth / 2) {
+                    currentPosition = 0;
+                }
+                animationFrameId = requestAnimationFrame(scrollCarousel);
+            }
+            carouselContainer.addEventListener('mouseenter', () => {
+                cancelAnimationFrame(animationFrameId);
+            });
+
+            carouselContainer.addEventListener('mouseleave', () => {
+                animationFrameId = requestAnimationFrame(scrollCarousel);
+            });
+            
+            // Pause video on hover (would be implemented with actual video elements)
+            const videos = document.querySelectorAll('.video-thumbnail');
+            videos.forEach(video => {
+                video.addEventListener('mouseenter', () => {
+                    // In a real implementation, this would pause the video
+                    console.log('Video paused');
+                });
+                
+                video.addEventListener('mouseleave', () => {
+                    // In a real implementation, this would play the video
+                    console.log('Video resumed');
+                });
+                
+                // Click to play (would open modal or redirect to YouTube)
+                video.addEventListener('click', () => {
+                    window.open('https://youtube.com', '_blank');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
